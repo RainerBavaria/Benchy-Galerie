@@ -1,5 +1,6 @@
 # Benchy Filament-Galerie
 
+
 Eine statische Seite, die zu jedem Filament ein gedrucktes Benchy zeigt.
 Voreingestellt sind nur die lagernden Filamente sichtbar; ein Schalter blendet
 die restlichen dazu. Kein Server, keine Datenbank, keine Build-Kette — eine
