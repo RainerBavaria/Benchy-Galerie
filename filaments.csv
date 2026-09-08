@@ -1,0 +1,15 @@
+id,hersteller,material,farbe,hex,lagernd,foto,duese_c,bett_c,spulen,notizen
+bambu-pla-basic-schwarz,Bambu Lab,PLA Basic,Schwarz,#1B1D21,ja,,220,60,2,AMS Slot 1
+bambu-pla-basic-gruen,Bambu Lab,PLA Basic,Bambu Grün,#00AE42,ja,,220,60,1,
+bambu-pla-silk-gold,Bambu Lab,PLA Silk,Gold,#C9A227,ja,,230,60,1,"schöner Glanz, für Deko-Teile"
+bambu-petg-hf-orange,Bambu Lab,PETG HF,Orange,#E8590C,nein,,255,70,0,nachbestellen
+polymaker-polyterra-muted-blue,Polymaker,PLA,Muted Blue,#4A6FA5,ja,,215,60,1,
+prusament-pla-galaxy-black,Prusament,PLA,Galaxy Black,#2A2C35,nein,,215,60,0,
+extrudr-petg-anthrazit,Extrudr,PETG,Anthrazit,#3B3F42,ja,,240,80,2,Standard für Außenteile
+fiberlogy-petg-burgund,Fiberlogy,PETG,Burgund,#6E1F2B,nein,,240,80,0,
+esun-abs-weiss,eSun,ABS+,Weiß,#F1F1ED,ja,,250,100,1,nur im Gehäuse drucken
+sunlu-plaplus-grau,Sunlu,PLA+,Grau,#8A8D91,ja,,210,60,3,Arbeitspferd
+fillamentum-asa-traffic-red,Fillamentum,ASA,Traffic Red,#B4232A,nein,,255,105,0,
+overture-tpu-natur,Overture,TPU 95A,Natur transparent,#DCD9CF,ja,,230,50,1,"langsam drucken, 20 mm/s"
+azurefilm-pla-sky-blue,AzureFilm,PLA,Sky Blue,#3FA9D8,ja,,210,60,1,
+devildesign-pla-neongruen,Devil Design,PLA,Neon Grün,#7BE12A,nein,,215,60,0,leuchtet gut unter UV

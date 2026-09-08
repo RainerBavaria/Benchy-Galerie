@@ -1,0 +1,11 @@
+In diesen Ordner kommen die Benchy-Fotos.
+
+Namensschema: gleicher Name wie in der Spalte "foto" der filaments.csv.
+Empfehlung: die id als Dateiname verwenden, z. B.
+
+    bambu-pla-basic-schwarz.jpg   ->  Spalte foto = bambu-pla-basic-schwarz.jpg
+
+Format:  JPG oder WEBP, Querformat 4:3, ca. 1200 x 900 px, unter 300 KB.
+Fehlt ein Foto, zeigt die Galerie automatisch ein Platzhalter-Boot
+in der hinterlegten Filamentfarbe. Die Datei hier kann gelöscht werden,
+sobald das erste Foto drin liegt.
