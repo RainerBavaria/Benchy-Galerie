@@ -334,20 +334,28 @@
       '<circle cx="70" cy="63" r="6"/><path d="M20 104h30M60 104h34M104 104h36"/></g></svg>';
   }
 
-  /* Probiert der Reihe nach mehrere Dateinamen durch, bevor der Platzhalter kommt. */
+  /* Sucht das Foto nachsichtig: Endung und Groß-/Kleinschreibung dürfen
+     abweichen. Probiert der Reihe nach durch, bis eine Datei antwortet;
+     erst wenn keine passt, bleibt der Platzhalter stehen. */
   function candidates(f) {
-    var list = [], base = f.foto ? f.foto : f.id;
-    if (/^https?:/.test(base)) return [base];
-    if (/\.(jpe?g|png|webp|gif|avif)$/i.test(base)) {
-      list.push(base);
-      list.push(base.replace(/\.[^.]+$/, function (e) { return e.toUpperCase(); }));
-      list.push(base.replace(/\.[^.]+$/, function (e) { return e.toLowerCase(); }));
-    } else {
-      [".jpg", ".JPG", ".jpeg", ".JPEG", ".png", ".PNG", ".webp"].forEach(function (e) { list.push(base + e); });
-    }
-    var seen = {};
-    return list.filter(function (n) { if (seen[n]) return false; seen[n] = 1; return true; })
-               .map(function (n) { return /^https?:/.test(n) ? n : "images/" + n; });
+    var roh = String(f.foto || f.id || "").trim();
+    if (!roh) return [];
+    if (/^https?:/i.test(roh)) return [roh];
+
+    var basis = roh.replace(/\.(jpe?g|png|webp|gif|avif)$/i, "");
+    var list = [];
+    if (roh !== basis) list.push(roh);                    // exakt wie angegeben
+    [".jpg", ".JPG", ".jpeg", ".png", ".webp"].forEach(function (e) { list.push(basis + e); });
+    [".JPG", ".jpg", ".png"].forEach(function (e) { list.push(basis.toUpperCase() + e); });
+    [".jpg", ".JPG", ".png"].forEach(function (e) { list.push(basis.toLowerCase() + e); });
+
+    var seen = {}, raus = [];
+    list.forEach(function (n) {
+      if (!n || seen[n]) return;
+      seen[n] = 1;
+      raus.push("images/" + n);
+    });
+    return raus;
   }
 
   function esc(s) {
