@@ -1,5 +1,4 @@
 id,hersteller,material,farbe,hex,lagernd,foto,duese_c,bett_c,spulen,notizen
-PLA_BAMBU_BLACK,Bambu Lab,PLA Basic,Schwarz,#000000,ja,PLA_BAMBU_BLACK.JPG,220,60,2,
-PLA_SUNLU_BLACK,SUNLU,PLA+,BLACK,#000000,ja,PLA_SUNLU_BLACK.JPG,220,60,1,
-PLA_CR3D_BLACK,CR3D,PLA,BLACK,#000000,ja,PLA_CR3D_BLACK.JPG,230,60,1,test-notiz
-
+bambu-lab-pla-black,Bambu Lab,PLA,Black,#000000,ja,PLA_Bambu_BLACK.JPG,220,60,1,
+cr3d-pla-black,CR3D,PLA+,Black,#000000,ja,PLA_CR3D_BLACK.JPG,210,60,1,
+sunlu-pla-black,Sunlu,PLA+,Black,#000000,ja,PLA_SUNLU_BLACK.JPG,210,60,1,
