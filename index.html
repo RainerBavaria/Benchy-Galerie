@@ -338,16 +338,45 @@
      abweichen. Probiert der Reihe nach durch, bis eine Datei antwortet;
      erst wenn keine passt, bleibt der Platzhalter stehen. */
   function candidates(f) {
-    var roh = String(f.foto || f.id || "").trim();
-    if (!roh) return [];
+    var roh = String(f.foto || "").trim();
     if (/^https?:/i.test(roh)) return [roh];
 
-    var basis = roh.replace(/\.(jpe?g|png|webp|gif|avif)$/i, "");
     var list = [];
-    if (roh !== basis) list.push(roh);                    // exakt wie angegeben
-    [".jpg", ".JPG", ".jpeg", ".png", ".webp"].forEach(function (e) { list.push(basis + e); });
-    [".JPG", ".jpg", ".png"].forEach(function (e) { list.push(basis.toUpperCase() + e); });
-    [".jpg", ".JPG", ".png"].forEach(function (e) { list.push(basis.toLowerCase() + e); });
+
+    /* 1. Was in der Spalte foto steht - exakt, dann mit anderen Endungen. */
+    if (roh) {
+      var basis = roh.replace(/\.(jpe?g|png|webp|gif|avif)$/i, "");
+      if (roh !== basis) list.push(roh);
+      [".jpg", ".JPG", ".jpeg", ".png", ".webp"].forEach(function (e) { list.push(basis + e); });
+      [".JPG", ".jpg", ".png"].forEach(function (e) { list.push(basis.toUpperCase() + e); });
+      [".jpg", ".JPG", ".png"].forEach(function (e) { list.push(basis.toLowerCase() + e); });
+    }
+
+    /* 2. Schema MATERIAL_HERSTELLER_FARBE, so wie die Dateien benannt sind.
+          Weil der Hersteller dort abgekürzt wird (Bambu Lab -> BAMBU,
+          Anycubic -> ANY), werden mehrere Schreibweisen durchprobiert:
+          erstes Wort, voller Name und die ersten drei bis fünf Buchstaben. */
+    var mat = teilname(f.material);
+    var farbe = teilname(f.farbe);
+    var voll = teilname(f.hersteller);
+    var erstes = teilname(String(f.hersteller || "").split(/\s+/)[0]);
+
+    var hersteller = [erstes, voll, erstes.slice(0, 3), erstes.slice(0, 4), erstes.slice(0, 5)];
+    var gesehen = {};
+    hersteller.forEach(function (v) {
+      if (!mat || !farbe || !v || v.length < 2 || gesehen[v]) return;
+      gesehen[v] = 1;
+      var name = mat + "_" + v + "_" + farbe;
+      [".JPG", ".jpg", ".png"].forEach(function (e) { list.push(name + e); });
+      if (v === erstes) {
+        [".jpg", ".JPG"].forEach(function (e) { list.push(name.toLowerCase() + e); });
+      }
+    });
+
+    /* 3. Zum Schluss die id aus Hersteller-Material-Farbe. */
+    if (f.id) {
+      [".jpg", ".JPG", ".png"].forEach(function (e) { list.push(f.id + e); });
+    }
 
     var seen = {}, raus = [];
     list.forEach(function (n) {
@@ -356,6 +385,17 @@
       raus.push("images/" + n);
     });
     return raus;
+  }
+
+  /* Ein Namensteil im Schema: GROSS, Leerzeichen zu Bindestrich, + und
+     Sonderzeichen raus. "PLA Silk" -> PLA-SILK, "PLA+" -> PLA, "Sky Blue" -> SKY-BLUE */
+  function teilname(s) {
+    return String(s || "")
+      .toUpperCase()
+      .replace(/Ä/g, "AE").replace(/Ö/g, "OE").replace(/Ü/g, "UE").replace(/ß/g, "SS")
+      .replace(/\+/g, "")
+      .replace(/[^A-Z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
   }
 
   function esc(s) {
