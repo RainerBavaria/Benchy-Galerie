@@ -328,16 +328,18 @@
     return hh * 60;
   }
 
+  /* Platzhalter, solange kein Foto da ist: Farbfläche mit Hinweistext. */
   function boatSVG(hex) {
     var dark = luminance(hex) < 0.45;
-    var deck = dark ? "rgba(255,255,255,.30)" : "rgba(0,0,0,.22)";
-    var line = dark ? "rgba(255,255,255,.55)" : "rgba(0,0,0,.40)";
-    return '<svg viewBox="0 0 160 120" role="img" aria-label="Noch kein Foto">' +
+    var fg = dark ? "rgba(255,255,255,.88)" : "rgba(0,0,0,.72)";
+    var line = dark ? "rgba(255,255,255,.35)" : "rgba(0,0,0,.28)";
+    var schrift = "system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif";
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-label="Foto folgt in Kürze">' +
       '<rect width="160" height="120" fill="' + hex + '"/>' +
-      '<g fill="' + deck + '" stroke="' + line + '" stroke-width="2" stroke-linejoin="round">' +
-      '<path d="M34 78h92l-13 20H47z"/><path d="M56 50h44v28H56z"/><rect x="103" y="34" width="11" height="20" rx="3"/></g>' +
-      '<g fill="none" stroke="' + line + '" stroke-width="2" stroke-linecap="round">' +
-      '<circle cx="70" cy="63" r="6"/><path d="M20 104h30M60 104h34M104 104h36"/></g></svg>';
+      '<rect x="9" y="9" width="142" height="102" rx="7" fill="none" stroke="' + line + '" stroke-width="1.5" stroke-dasharray="6 5"/>' +
+      '<text x="80" y="58" text-anchor="middle" font-family="' + schrift + '" font-size="13" fill="' + fg + '">Foto folgt</text>' +
+      '<text x="80" y="75" text-anchor="middle" font-family="' + schrift + '" font-size="13" fill="' + fg + '">in Kürze</text>' +
+      '</svg>';
   }
 
   /* Sucht das Foto nachsichtig: Endung und Groß-/Kleinschreibung dürfen
