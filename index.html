@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Benchy-Galerie der vorrätigen 3D-Druck-Filamente">
+<meta name="description" content="Filament-Farben, die bei Rainer's 3D Stube auf Lager sind">
 <title>Benchy Filament-Galerie</title>
 <style>
   :root {
@@ -161,6 +161,7 @@
   }
   .foot-inner { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; }
   .foot a { color: inherit; }
+  .foot-note { margin: 10px 0 0; max-width: 72ch; font-size: .83rem; line-height: 1.5; opacity: .9; }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
@@ -170,7 +171,7 @@
   <div class="wrap top-inner">
     <div>
       <h1>Filament-Farben auf Lager</h1>
-      <p class="tagline">Jede Farbe als gedrucktes Benchy fotografiert. Für eine Anfrage genügt der Farbname unter dem Bild.</p>
+      <p class="tagline">In diesen Farben kann ich deinen Auftrag sofort drucken. Jede ist als dasselbe Modell gedruckt und fotografiert — für eine Anfrage genügt die Bezeichnung unter dem Bild.</p>
     </div>
     <div class="stat"><b id="statIn">–</b><span>Farben vorrätig</span></div>
   </div>
@@ -194,11 +195,16 @@
 </main>
 
 <footer class="foot">
-  <div class="wrap foot-inner">
-    <span id="stand"></span>
-    <a href="https://rainers3dstube.de">rainers3dstube.de</a>
-    <a href="https://rainers3dstube.de/impressum/">Impressum</a>
-    <a href="https://rainers3dstube.de/datenschutzerklarung/">Datenschutzerklärung</a>
+  <div class="wrap">
+    <div class="foot-inner">
+      <span id="stand"></span>
+      <a href="https://rainers3dstube.de">rainers3dstube.de</a>
+      <a href="https://rainers3dstube.de/impressum/">Impressum</a>
+      <a href="https://rainers3dstube.de/datenschutzerklarung/">Datenschutzerklärung</a>
+    </div>
+    <p class="foot-note">Farben können je nach Bildschirm abweichen. Untereinander sind die Fotos
+      gut vergleichbar, weil alle unter gleichen Bedingungen aufgenommen wurden — der absolute
+      Farbton kann in Wirklichkeit trotzdem etwas anders wirken.</p>
   </div>
 </footer>
 
@@ -413,7 +419,7 @@
     function tryNext() {
       if (i >= srcs.length) return;
       var img = document.createElement("img");
-      img.alt = "Benchy in " + f.farbe;
+      img.alt = "Gedrucktes Modell in " + f.farbe;
       img.decoding = "async";
       if (!eager) img.loading = "lazy";
       img.onerror = function () {
@@ -475,7 +481,7 @@
       '<h2>' + esc(f.farbe) + '</h2></div>' +
       '<p class="d-sub">' + esc(f.hersteller) + (f.hersteller && f.material ? " · " : "") + esc(f.material) + '</p>' +
       '<button class="btn" type="button" id="copyBtn">Bezeichnung kopieren</button>' +
-      '<p class="d-hint">Diese Bezeichnung genügt für deine Anfrage.</p>';
+      '<p class="d-hint">Diese Bezeichnung genügt für deine Anfrage. Je nach Bildschirm kann der Farbton in Wirklichkeit etwas anders wirken.</p>';
     var btn = $("copyBtn");
     btn.addEventListener("click", function () {
       var text = label(f);
